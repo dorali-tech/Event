@@ -1,0 +1,1408 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Marketing Dashboard for CEO</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet" crossorigin="anonymous" />
+  <!-- Recharts -->
+  <script src="https://cdn.jsdelivr.net/npm/recharts@2.15.1/umd/recharts.min.js"></script>
+  
+  <!-- Tailwind 配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0F4C81',
+            secondary: '#3A7CA5',
+            accent: '#1E88E5',
+            light: '#F8FAFC',
+            dark: '#1A365D'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .card-shadow {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+      .transition-all-300 {
+        transition: all 0.3s ease;
+      }
+    }
+  </style>
+
+  <style>
+    :root {
+      /* Colors from the design */
+      --color-primary: #0F4C81;
+      --color-secondary: #3A7CA5;
+      --color-accent: #1E88E5;
+      --color-light: #F8FAFC;
+      --color-dark: #1A365D;
+    }
+
+    .card-hover {
+      transition: transform 0.3s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-5px);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-blue-800 text-white shadow-md">
+    <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-4">
+        <div class="text-xl font-bold flex items-center">
+          <i class="fa fa-line-chart mr-2"></i>
+          <span>Digital Marketing Dashboard</span>
+        </div>
+      </div>
+      <div class="flex items-center space-x-4">
+        <div className="relative">
+          <button className="flex items-center space-x-1 bg-white bg-opacity-20 px-3 py-1 rounded-md hover:bg-opacity-30 transition-all">
+            <i class="fa fa-calendar"></i>
+            <span>2025</span>
+            <i class="fa fa-chevron-down text-xs"></i>
+          </button>
+        </div>
+        <div className="flex items-center space-x-2">
+          <div className="w-8 h-8 rounded-full bg-white text-primary flex items-center justify-center">
+            <i class="fa fa-user"></i>
+          </div>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main className="container mx-auto px-4 py-6 flex-grow">
+    <!-- Tabs -->
+    <div class="mb-6 border-b border-gray-200">
+      <ul className="flex flex-wrap -mb-px text-sm font-medium text-center" id="dashboardTabs" role="tablist">
+        <li className="mr-2" role="presentation">
+          <button 
+            className="inline-block p-4 border-b-2 rounded-t-lg transition-all border-primary text-primary" 
+            id="social-tab" 
+            data-tab="social" 
+            type="button" 
+            role="tab" 
+            aria-controls="social" 
+            aria-selected="true"
+            onclick="switchTab('social')"
+          >
+            <i class="fa fa-share-alt mr-2"></i>Social Media Dashboard
+          </button>
+        </li>
+        <li className="mr-2" role="presentation">
+          <button 
+            className="inline-block p-4 border-b-2 rounded-t-lg transition-all border-transparent hover:text-gray-600 hover:border-gray-300" 
+            id="funnel-tab" 
+            data-tab="funnel" 
+            type="button" 
+            role="tab" 
+            aria-controls="funnel" 
+            aria-selected="false"
+            onclick="switchTab('funnel')"
+          >
+            <i class="fa fa-filter mr-2"></i>User Funnel Metrics
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Social Media Dashboard Tab Content -->
+    <div id="social" class="tab-content block">
+      <!-- Filter Section -->
+      <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 mb-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Month</label>
+            <select className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+              <option value="all">All Months</option>
+              <option value="jan">January</option>
+              <option value="feb">February</option>
+              <option value="mar">March</option>
+              <option value="apr">April</option>
+              <option value="may">May</option>
+              <option value="jun">June</option>
+              <option value="jul">July</option>
+              <option value="aug">August</option>
+              <option value="sep">September</option>
+              <option value="oct">October</option>
+              <option value="nov">November</option>
+              <option value="dec">December</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Year</label>
+            <select className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+              <option value="2025">2025</option>
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">BU</label>
+            <select className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+              <option value="all">All BUs</option>
+              <option value="bu1">Business Unit 1</option>
+              <option value="bu2">Business Unit 2</option>
+              <option value="bu3">Business Unit 3</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Platform</label>
+            <select className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+              <option value="all">All Platforms</option>
+              <option value="gongzhonghao_a">公众号A</option>
+              <option value="gongzhonghao_b">公众号B</option>
+              <option value="gongzhonghao_c">公众号C</option>
+              <option value="gongzhonghao_d">公众号D</option>
+              <option value="shipinhao_a">视频号A</option>
+              <option value="shipinhao_b">视频号B</option>
+              <option value="shipinhao_c">视频号C</option>
+              <option value="shipinhao_d">视频号D</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Content Type</label>
+            <select className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+              <option value="all">All Types</option>
+              <option value="article">Article</option>
+              <option value="video">Video</option>
+              <option value="infographic">Infographic</option>
+              <option value="podcast">Podcast</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Product</label>
+            <select className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+              <option value="all">All Products</option>
+              <option value="product1">Product 1</option>
+              <option value="product2">Product 2</option>
+              <option value="product3">Product 3</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Campaign</label>
+            <select className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+              <option value="all">All Campaigns</option>
+              <option value="campaign1">Campaign 1</option>
+              <option value="campaign2">Campaign 2</option>
+              <option value="campaign3">Campaign 3</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">爆款</label>
+            <select className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+              <option value="all">All Content</option>
+              <option value="hot">爆款 Only</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metric Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+        <!-- Total Posts -->
+        <div class="bg-white rounded-lg shadow-md p-4 transition-all hover:shadow-lg">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-gray-500">Total Posts</p>
+              <h3 class="text-2xl font-bold text-gray-800 mt-1">1,248</h3>
+              <div class="flex items-center mt-2">
+                <span class="text-sm font-medium flex items-center text-green-500">
+                  <i class="fa fa-arrow-up mr-1"></i>+12.5%
+                </span>
+                <span class="text-gray-500 text-sm ml-2">vs PY</span>
+              </div>
+            </div>
+            <div class="bg-blue-100 p-3 rounded-full">
+              <i class="fa file-text-o text-primary text-xl"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total Views -->
+        <div class="bg-white rounded-lg shadow-md p-4 transition-all hover:shadow-lg">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-gray-500">Total Views</p>
+              <h3 class="text-2xl font-bold text-gray-800 mt-1">456,789</h3>
+              <div class="flex items-center mt-2">
+                <span class="text-sm font-medium flex items-center text-green-500">
+                  <i class="fa fa-arrow-up mr-1"></i>+8.3%
+                </span>
+                <span class="text-gray-500 text-sm ml-2">vs PY</span>
+              </div>
+            </div>
+            <div class="bg-green-100 p-3 rounded-full">
+              <i class="fa eye text-green-600 text-xl"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total Engagement -->
+        <div class="bg-white rounded-lg shadow-md p-4 transition-all hover:shadow-lg">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-gray-500">Total Engagement</p>
+              <h3 class="text-2xl font-bold text-gray-800 mt-1">78,543</h3>
+              <div class="flex items-center mt-2">
+                <span class="text-sm font-medium flex items-center text-green-500">
+                  <i class="fa fa-arrow-up mr-1"></i>+15.7%
+                </span>
+                <span class="text-gray-500 text-sm ml-2">vs PY</span>
+              </div>
+            </div>
+            <div class="bg-purple-100 p-3 rounded-full">
+              <i class="fa heart text-purple-600 text-xl"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conversion Rate -->
+        <div class="bg-white rounded-lg shadow-md p-4 transition-all hover:shadow-lg">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-gray-500">Conversion Rate</p>
+              <h3 class="text-2xl font-bold text-gray-800 mt-1">3.45%</h3>
+              <div class="flex items-center mt-2">
+                <span class="text-sm font-medium flex items-center text-red-500">
+                  <i class="fa fa-arrow-down mr-1"></i>-0.8%
+                </span>
+                <span class="text-gray-500 text-sm ml-2">vs PY</span>
+              </div>
+            </div>
+            <div class="bg-orange-100 p-3 rounded-full">
+              <i class="fa exchange text-orange-600 text-xl"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Views Performance Section -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-xl font-bold text-gray-800">Views Performance</h2>
+          <div class="flex space-x-2">
+            <button class="px-3 py-1 text-sm bg-primary text-white rounded-md hover:bg-opacity-90 transition-all">Monthly</button>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-2 bg-blue-50 rounded-lg p-4 flex flex-col justify-center items-center text-center">
+            <h3 class="text-lg font-semibold text-gray-700 mb-2">Total Views</h3>
+            <div class="text-5xl font-bold text-primary mb-2">456,789</div>
+            <div class="flex items-center">
+              <span class="text-green-500 text-sm font-medium flex items-center">
+                <i class="fa fa-arrow-up mr-1"></i>8.3%
+              </span>
+              <span class="text-gray-500 text-sm ml-2">vs PY</span>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <div id="viewsChart" class="h-[250px]"></div>
+          </div>
+          <div class="lg:col-span-5">
+            <h3 class="text-lg font-semibold text-gray-800 mb-3">Top 5 Content by Views</h3>
+            <div class="overflow-x-auto">
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+                    <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Platform</th>
+                    <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Views</th>
+                    <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reading</th>
+                    <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Video</th>
+                    <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Link</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <tr>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">2025年数字营销的未来</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">公众号A</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">24,567</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">24,567</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-400">-</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                      <a href="#" class="text-primary hover:underline">查看</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">如何在线建立强大的品牌形象</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">视频号B</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">19,876</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-400">-</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">19,876</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                      <a href="#" class="text-primary hover:underline">查看</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">AI在内容创作中的力量</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">视频号C</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">17,654</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-400">-</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">17,654</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                      <a href="#" class="text-primary hover:underline">查看</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">2025年值得关注的社交媒体趋势</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">公众号B</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">16,543</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">16,543</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-400">-</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                      <a href="#" class="text-primary hover:underline">查看</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">通过影响者营销最大化ROI</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">公众号C</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">15,432</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">15,432</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-400">-</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                      <a href="#" class="text-primary hover:underline">查看</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Engagement Performance Section -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-xl font-bold text-gray-800">Engagement Performance</h2>
+          <div class="flex space-x-2">
+            <button class="px-3 py-1 text-sm bg-primary text-white rounded-md hover:bg-opacity-90 transition-all">Monthly</button>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-2 bg-purple-50 rounded-lg p-4 flex flex-col justify-center items-center text-center">
+            <h3 class="text-lg font-semibold text-gray-700 mb-2">Total Engagement</h3>
+            <div class="text-5xl font-bold text-purple-600 mb-2">78,543</div>
+            <div class="flex items-center">
+              <span class="text-green-500 text-sm font-medium flex items-center">
+                <i class="fa fa-arrow-up mr-1"></i>15.7%
+              </span>
+              <span class="text-gray-500 text-sm ml-2">vs PY</span>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <div id="engagementChart" class="h-[250px]"></div>
+          </div>
+          <div class="lg:col-span-5">
+            <h3 class="text-lg font-semibold text-gray-800 mb-3">Top 5 Content by Engagement</h3>
+            <div class="overflow-x-auto">
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+                    <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Platform</th>
+                    <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Engagement</th>
+                    <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Shares</th>
+                    <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Comments</th>
+                    <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Link</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <tr>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">2025年数字营销的未来</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">公众号A</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">5,678</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">2,345</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">1,234</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                      <a href="#" class="text-primary hover:underline">查看</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">如何在线建立强大的品牌形象</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">视频号B</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">4,567</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">1,987</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">1,056</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                      <a href="#" class="text-primary hover:underline">查看</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">AI在内容创作中的力量</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">视频号C</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">4,321</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">1,876</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">987</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                      <a href="#" class="text-primary hover:underline">查看</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">2025年值得关注的社交媒体趋势</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">公众号B</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">3,987</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">1,654</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">876</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                      <a href="#" class="text-primary hover:underline">查看</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">通过影响者营销最大化ROI</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">公众号C</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">3,765</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">1,543</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">765</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                      <a href="#" class="text-primary hover:underline">查看</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reading vs Video & Engagement Breakdown -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <!-- Reading vs Video -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-bold text-gray-800">Reading vs Video Views</h2>
+            <div class="text-sm text-gray-500">总计: 4,232,865 + 7,850,226 = 12,083,091</div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div class="bg-blue-50 rounded-lg p-4 text-center">
+              <h3 class="text-sm font-medium text-gray-700 mb-1">Reading Views</h3>
+              <div class="text-2xl font-bold text-primary mb-1">4,232,865</div>
+              <div class="text-xs text-red-500">
+                <i class="fa fa-arrow-down"></i>70.47% vs PY
+              </div>
+            </div>
+            <div class="bg-green-50 rounded-lg p-4 text-center">
+              <h3 class="text-sm font-medium text-gray-700 mb-1">Video Views</h3>
+              <div class="text-2xl font-bold text-green-600 mb-1">7,850,226</div>
+              <div class="text-xs text-green-500">
+                <i class="fa fa-arrow-up"></i>6.69% vs PY
+              </div>
+            </div>
+          </div>
+          <div id="contentTypeChart" class="h-[200px] grid grid-cols-1 lg:grid-cols-2 gap-4"></div>
+        </div>
+
+        <!-- Engagement Breakdown -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-bold text-gray-800">Engagement Breakdown</h2>
+            <div class="text-sm text-gray-500">总计: 78,543</div>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-2 mb-4">
+            <div class="bg-blue-50 rounded-lg p-3 text-center">
+              <h3 class="text-xs font-medium text-gray-700 mb-1">Shares</h3>
+              <div class="text-lg font-bold text-blue-600">19,636</div>
+              <div class="text-xs text-gray-500">25%</div>
+            </div>
+            <div class="bg-purple-50 rounded-lg p-3 text-center">
+              <h3 class="text-xs font-medium text-gray-700 mb-1">Likes</h3>
+              <div class="text-lg font-bold text-purple-600">27,490</div>
+              <div class="text-xs text-gray-500">35%</div>
+            </div>
+            <div class="bg-yellow-50 rounded-lg p-3 text-center">
+              <h3 class="text-xs font-medium text-gray-700 mb-1">Favorites</h3>
+              <div class="text-lg font-bold text-yellow-600">11,781</div>
+              <div class="text-xs text-gray-500">15%</div>
+            </div>
+            <div class="bg-red-50 rounded-lg p-3 text-center">
+              <h3 class="text-xs font-medium text-gray-700 mb-1">Comments</h3>
+              <div class="text-lg font-bold text-red-600">11,781</div>
+              <div class="text-xs text-gray-500">15%</div>
+            </div>
+            <div class="bg-green-50 rounded-lg p-3 text-center">
+              <h3 class="text-xs font-medium text-gray-700 mb-1">Clicks</h3>
+              <div class="text-lg font-bold text-green-600">7,855</div>
+              <div class="text-xs text-gray-500">10%</div>
+            </div>
+          </div>
+          <div id="engagementBreakdownChart" class="h-[200px]"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- User Funnel Metrics Tab Content -->
+    <div id="funnel" class="tab-content hidden">
+      <!-- Funnel Metric Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 mb-6">
+        <div class="bg-white rounded-lg shadow-md p-4 transition-all hover:shadow-lg">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-gray-500">Total Followers</p>
+              <h3 class="text-2xl font-bold text-gray-800 mt-1">125,432</h3>
+              <div class="flex items-center mt-2">
+                <span class="text-sm font-medium flex items-center text-green-500">
+                  <i class="fa fa-arrow-up mr-1"></i>+7.2%
+                </span>
+                <span class="text-gray-500 text-sm ml-2">vs PY</span>
+              </div>
+            </div>
+            <div class="bg-blue-100 p-3 rounded-full">
+              <i class="fa users text-primary text-xl"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-4 transition-all hover:shadow-lg">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-gray-500">Registered Users</p>
+              <h3 class="text-2xl font-bold text-gray-800 mt-1">45,678</h3>
+              <div class="flex items-center mt-2">
+                <span class="text-sm font-medium flex items-center text-green-500">
+                  <i class="fa fa-arrow-up mr-1"></i>+5.8%
+                </span>
+                <span class="text-gray-500 text-sm ml-2">vs PY</span>
+              </div>
+            </div>
+            <div class="bg-green-100 p-3 rounded-full">
+              <i class="fa user-plus text-green-600 text-xl"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-4 transition-all hover:shadow-lg">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-gray-500">New Reachable HCP</p>
+              <h3 class="text-2xl font-bold text-gray-800 mt-1">3,456</h3>
+              <div class="flex items-center mt-2">
+                <span class="text-sm font-medium flex items-center text-green-500">
+                  <i class="fa fa-arrow-up mr-1"></i>+12.3%
+                </span>
+                <span class="text-gray-500 text-sm ml-2">vs PY</span>
+              </div>
+            </div>
+            <div class="bg-purple-100 p-3 rounded-full">
+              <i class="fa user-md text-purple-600 text-xl"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-4 transition-all hover:shadow-lg">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-gray-500">Active Users</p>
+              <h3 class="text-2xl font-bold text-gray-800 mt-1">28,945</h3>
+              <div class="flex items-center mt-2">
+                <span class="text-sm font-medium flex items-center text-green-500">
+                  <i class="fa fa-arrow-up mr-1"></i>+4.7%
+                </span>
+                <span class="text-gray-500 text-sm ml-2">vs PY</span>
+              </div>
+            </div>
+            <div class="bg-blue-100 p-3 rounded-full">
+              <i class="fa user text-blue-600 text-xl"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-4 transition-all hover:shadow-lg">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-gray-500">Total Leads</p>
+              <h3 class="text-2xl font-bold text-gray-800 mt-1">1,234</h3>
+              <div class="flex items-center mt-2">
+                <span class="text-sm font-medium flex items-center text-green-500">
+                  <i class="fa fa-arrow-up mr-1"></i>+8.7%
+                </span>
+                <span class="text-gray-500 text-sm ml-2">vs PY</span>
+              </div>
+            </div>
+            <div class="bg-orange-100 p-3 rounded-full">
+              <i class="fa envelope text-orange-600 text-xl"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-4 transition-all hover:shadow-lg">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-gray-500">MQL Conversion Rate</p>
+              <h3 class="text-2xl font-bold text-gray-800 mt-1">2.7%</h3>
+              <div class="flex items-center mt-2">
+                <span class="text-sm font-medium flex items-center text-green-500">
+                  <i class="fa fa-arrow-up mr-1"></i>+0.3%
+                </span>
+                <span class="text-gray-500 text-sm ml-2">vs PY</span>
+              </div>
+            </div>
+            <div class="bg-red-100 p-3 rounded-full">
+              <i class="fa exchange text-red-600 text-xl"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WeChat and Video Followers -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h2 class="text-lg font-bold text-gray-800 mb-4">WeChat</h2>
+          <div id="wechatFollowersChart" class="h-[250px]"></div>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h2 class="text-lg font-bold text-gray-800 mb-4">Video</h2>
+          <div id="videoFollowersChart" class="h-[250px]"></div>
+        </div>
+      </div>
+
+      <!-- HCP Profile Analysis -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-6">Reachable HCP Contacts Profile Analysis</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+          <div class="bg-gray-50 rounded-lg p-6 flex flex-col justify-center items-center text-center">
+            <h3 class="text-md font-semibold text-gray-800 mb-4">KPI达成率</h3>
+            <div id="kpiGaugeChart" class="h-[200px]"></div>
+            <div class="text-center mt-4">
+              <div class="text-3xl font-bold text-primary" style={{ backgroundColor: "#FFFFFF" }}>87%</div>
+              <div class="text-sm text-gray-500">目标: 10,000</div>
+            </div>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-md font-semibold text-gray-800 mb-4 text-center">Actual vs KPI</h3>
+            <div id="actualVsKpiChart" class="h-[200px]"></div>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-md font-semibold text-gray-800 mb-4 text-center">Personal Distribution</h3>
+            <div id="professionalTitleChart1" class="h-[200px]"></div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-md font-semibold text-gray-800 mb-4 text-center">City level Distribution</h3>
+            <div id="cityLevelChart1" class="h-[200px]"></div>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-md font-semibold text-gray-800 mb-4 text-center">Hospital Class Distribution</h3>
+            <div id="hospitalLevelChart1" class="h-[200px]"></div>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-md font-semibold text-gray-800 mb-4 text-center">TA Distribution (Top 5)</h3>
+            <div id="departmentChart1" class="h-[200px]"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- New Reachable HCP Profile -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-6">New Reachable HCP Profile</h2>
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+          <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <div class="bg-gray-50 rounded-lg p-4">
+              <h4 class="text-md font-semibold text-gray-800 mb-3 text-center">Personal Distribution</h4>
+              <div id="professionalTitleChart2" class="h-[200px]"></div>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4">
+              <h4 class="text-md font-semibold text-gray-800 mb-3 text-center">City level Distribution</h4>
+              <div id="cityLevelChart2" class="h-[200px]"></div>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4">
+              <h4 class="text-md font-semibold text-gray-800 mb-3 text-center">Hospital Class Distribution</h4>
+              <div id="hospitalLevelChart2" class="h-[200px]"></div>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4">
+              <h4 class="text-md font-semibold text-gray-800 mb-3 text-center">TA Distribution (top 5)</h4>
+              <div id="departmentChart2" class="h-[200px]"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leads Source -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-6">Leads Source</h2>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-800 text-white">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">No.</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Category</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Digital</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Event</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Leads %</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">58%</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">42%</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Raw leads to MQL %</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">42%</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">58%</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">MQL to Oppty %</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">25%</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">75%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Greater China MQL -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-6">大中华区MQL</h2>
+        <div class="flex justify-center" style={{ height: "350px", width: "100%", maxWidth: "600px", margin: "0 auto" }}>
+          <div id="greaterChinaMqlChart" class="h-[350px] w-full"></div>
+        </div>
+      </div>
+
+      <!-- User Conversion Funnel -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-6">User Conversion Funnel（使用漏斗图展示）</h2>
+        <div class="flex justify-center" style={{ height: "400px", width: "100%", maxWidth: "800px", margin: "0 auto" }}>
+          <div id="funnelChart" class="h-[400px] w-full"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-6">
+    <div class="container mx-auto px-4 text-center">
+      <p>&copy; 2025 Digital Marketing Dashboard. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Tab switching function
+    function switchTab(tabId) {
+      // Hide all tab content
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.add('hidden');
+        content.classList.remove('block');
+      });
+      
+      // Show selected tab content
+      document.getElementById(tabId).classList.remove('hidden');
+      document.getElementById(tabId).classList.add('block');
+      
+      // Update active tab styling
+      document.querySelectorAll('#dashboardTabs button').forEach(button => {
+        button.classList.remove('border-primary', 'text-primary');
+        button.classList.add('border-transparent', 'hover:text-gray-600', 'hover:border-gray-300');
+        button.setAttribute('aria-selected', 'false');
+      });
+      
+      // Set selected tab as active
+      const activeButton = document.querySelector(`button[data-tab="${tabId}"]`);
+      activeButton.classList.add('border-primary', 'text-primary');
+      activeButton.classList.remove('border-transparent', 'hover:text-gray-600', 'hover:border-gray-300');
+      activeButton.setAttribute('aria-selected', 'true');
+    }
+
+    // Initialize charts when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Views Chart
+      const viewsChartData = [
+        { month: 'Jan', views2025: 32000, views2024: 28000 },
+        { month: 'Feb', views2025: 35000, views2024: 30000 },
+        { month: 'Mar', views2025: 42000, views2024: 36000 },
+        { month: 'Apr', views2025: 38000, views2024: 34000 },
+        { month: 'May', views2025: 45000, views2024: 39000 },
+        { month: 'Jun', views2025: 48000, views2024: 41000 },
+        { month: 'Jul', views2025: 52000, views2024: 45000 },
+        { month: 'Aug', views2025: 56000, views2024: 48000 },
+        { month: 'Sep', views2025: 53000, views2024: 46000 },
+        { month: 'Oct', views2025: 58000, views2024: 50000 },
+        { month: 'Nov', views2025: 62000, views2024: 54000 },
+        { month: 'Dec', views2025: 65000, views2024: 57000 }
+      ];
+
+      new Recharts.LineChart({
+        width: '100%',
+        height: 250,
+        data: viewsChartData,
+        margin: { top: 5, right: 30, left: 20, bottom: 5 },
+        container: document.getElementById('viewsChart')
+      }).add(Recharts.CartesianGrid, { strokeDasharray: '3 3', stroke: '#f0f0f0' })
+        .add(Recharts.XAxis, { dataKey: 'month', stroke: '#94A3B8' })
+        .add(Recharts.YAxis, { stroke: '#94A3B8' })
+        .add(Recharts.Tooltip)
+        .add(Recharts.Legend)
+        .add(Recharts.Line, {
+          type: 'monotone',
+          dataKey: 'views2025',
+          name: '2025 Views',
+          stroke: '#0F4C81',
+          strokeWidth: 2,
+          fill: 'rgba(15, 76, 129, 0.1)',
+          dot: false
+        })
+        .add(Recharts.Line, {
+          type: 'monotone',
+          dataKey: 'views2024',
+          name: '2024 Views',
+          stroke: '#94A3B8',
+          strokeWidth: 2,
+          strokeDasharray: '5 5',
+          dot: false
+        })
+        .render();
+
+      // Engagement Chart
+      const engagementChartData = [
+        { month: 'Jan', engagement2025: 5200, engagement2024: 4500 },
+        { month: 'Feb', engagement2025: 5800, engagement2024: 4900 },
+        { month: 'Mar', engagement2025: 6500, engagement2024: 5600 },
+        { month: 'Apr', engagement2025: 6100, engagement2024: 5300 },
+        { month: 'May', engagement2025: 7200, engagement2024: 6200 },
+        { month: 'Jun', engagement2025: 7600, engagement2024: 6500 },
+        { month: 'Jul', engagement2025: 8300, engagement2024: 7100 },
+        { month: 'Aug', engagement2025: 8900, engagement2024: 7500 },
+        { month: 'Sep', engagement2025: 8500, engagement2024: 7200 },
+        { month: 'Oct', engagement2025: 9200, engagement2024: 7800 },
+        { month: 'Nov', engagement2025: 9800, engagement2024: 8300 },
+        { month: 'Dec', engagement2025: 10500, engagement2024: 8900 }
+      ];
+
+      new Recharts.LineChart({
+        width: '100%',
+        height: 250,
+        data: engagementChartData,
+        margin: { top: 5, right: 30, left: 20, bottom: 5 },
+        container: document.getElementById('engagementChart')
+      }).add(Recharts.CartesianGrid, { strokeDasharray: '3 3', stroke: '#f0f0f0' })
+        .add(Recharts.XAxis, { dataKey: 'month', stroke: '#94A3B8' })
+        .add(Recharts.YAxis, { stroke: '#94A3B8' })
+        .add(Recharts.Tooltip)
+        .add(Recharts.Legend)
+        .add(Recharts.Line, {
+          type: 'monotone',
+          dataKey: 'engagement2025',
+          name: '2025 Engagement',
+          stroke: '#3A7CA5',
+          strokeWidth: 2,
+          fill: 'rgba(58, 124, 165, 0.1)',
+          dot: false
+        })
+        .add(Recharts.Line, {
+          type: 'monotone',
+          dataKey: 'engagement2024',
+          name: '2024 Engagement',
+          stroke: '#94A3B8',
+          strokeWidth: 2,
+          strokeDasharray: '5 5',
+          dot: false
+        })
+        .render();
+
+      // Content Type Chart
+      const contentTypeData = [
+        { month: 'Jan', reading: 150000, readingPY: 180000, video: 900000, videoPY: 850000 },
+        { month: 'Feb', reading: 160000, readingPY: 200000, video: 850000, videoPY: 820000 },
+        { month: 'Mar', reading: 140000, readingPY: 190000, video: 950000, videoPY: 880000 },
+        { month: 'Apr', reading: 155000, readingPY: 185000, video: 880000, videoPY: 830000 },
+        { month: 'May', reading: 165000, readingPY: 195000, video: 920000, videoPY: 860000 },
+        { month: 'Jun', reading: 155000, readingPY: 190000, video: 890000, videoPY: 840000 }
+      ];
+
+      // Create Reading Chart
+      const readingChartContainer = document.createElement('div');
+      readingChartContainer.className = 'border border-gray-200 rounded-lg p-2';
+      document.getElementById('contentTypeChart').appendChild(readingChartContainer);
+
+      new Recharts.BarChart({
+        width: '100%',
+        height: 200,
+        data: contentTypeData,
+        margin: { top: 5, right: 10, left: 10, bottom: 5 },
+        container: readingChartContainer
+      }).add(Recharts.CartesianGrid, { strokeDasharray: '3 3', stroke: '#f0f0f0', vertical: false })
+        .add(Recharts.XAxis, { dataKey: 'month', stroke: '#94A3B8', tick: { fontSize: 10 } })
+        .add(Recharts.YAxis, { stroke: '#94A3B8', tick: { fontSize: 10 } })
+        .add(Recharts.Tooltip)
+        .add(Recharts.Bar, { dataKey: 'reading', fill: '#0F4C81', radius: [4, 4, 0, 0] })
+        .add(Recharts.Bar, { dataKey: 'readingPY', fill: '#94A3B8', radius: [4, 4, 0, 0] })
+        .render();
+
+      // Create Video Chart
+      const videoChartContainer = document.createElement('div');
+      videoChartContainer.className = 'border border-gray-200 rounded-lg p-2';
+      document.getElementById('contentTypeChart').appendChild(videoChartContainer);
+
+      new Recharts.BarChart({
+        width: '100%',
+        height: 200,
+        data: contentTypeData,
+        margin: { top: 5, right: 10, left: 10, bottom: 5 },
+        container: videoChartContainer
+      }).add(Recharts.CartesianGrid, { strokeDasharray: '3 3', stroke: '#f0f0f0', vertical: false })
+        .add(Recharts.XAxis, { dataKey: 'month', stroke: '#94A3B8', tick: { fontSize: 10 } })
+        .add(Recharts.YAxis, { stroke: '#94A3B8', tick: { fontSize: 10 } })
+        .add(Recharts.Tooltip)
+        .add(Recharts.Bar, { dataKey: 'video', fill: '#38A169', radius: [4, 4, 0, 0] })
+        .add(Recharts.Bar, { dataKey: 'videoPY', fill: '#94A3B8', radius: [4, 4, 0, 0] })
+        .render();
+
+      // Engagement Breakdown Chart
+      const engagementBreakdownData = [
+        { name: 'Shares', value: 25 },
+        { name: 'Likes', value: 35 },
+        { name: 'Favorites', value: 15 },
+        { name: 'Comments', value: 15 },
+        { name: 'Clicks', value: 10 }
+      ];
+
+      const COLORS = ['#0F4C81', '#3A7CA5', '#1E88E5', '#64B5F6', '#90CAF9'];
+
+      new Recharts.PieChart({
+        width: '100%',
+        height: 200,
+        container: document.getElementById('engagementBreakdownChart')
+      }).add(Recharts.Pie, {
+        data: engagementBreakdownData,
+        cx: '50%',
+        cy: '50%',
+        innerRadius: 60,
+        outerRadius: 80,
+        paddingAngle: 5,
+        dataKey: 'value',
+        label: ({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`,
+        fill: '#8884d8',
+        labelLine: false
+      }).add(Recharts.Tooltip, { formatter: (value) => `${value}%` })
+        .render();
+
+      // WeChat Followers Chart
+      const wechatFollowersData = [
+        { month: 'Jan', a: 1200, b: 900, c: 700, d: 500 },
+        { month: 'Feb', a: 1500, b: 1100, c: 850, d: 600 },
+        { month: 'Mar', a: 1800, b: 1300, c: 1000, d: 700 },
+        { month: 'Apr', a: 2100, b: 1500, c: 1150, d: 800 },
+        { month: 'May', a: 2400, b: 1700, c: 1300, d: 900 },
+        { month: 'Jun', a: 2700, b: 1900, c: 1450, d: 1000 }
+      ];
+
+      new Recharts.BarChart({
+        width: '100%',
+        height: 250,
+        data: wechatFollowersData,
+        margin: { top: 5, right: 30, left: 20, bottom: 5 },
+        container: document.getElementById('wechatFollowersChart')
+      }).add(Recharts.CartesianGrid, { strokeDasharray: '3 3', stroke: '#f0f0f0' })
+        .add(Recharts.XAxis, { dataKey: 'month', stroke: '#94A3B8' })
+        .add(Recharts.YAxis, { stroke: '#94A3B8' })
+        .add(Recharts.Tooltip)
+        .add(Recharts.Legend)
+        .add(Recharts.Bar, { dataKey: 'a', name: '公众号A', fill: '#0F4C81' })
+        .add(Recharts.Bar, { dataKey: 'b', name: '公众号B', fill: '#3A7CA5' })
+        .add(Recharts.Bar, { dataKey: 'c', name: '公众号C', fill: '#1E88E5' })
+        .add(Recharts.Bar, { dataKey: 'd', name: '公众号D', fill: '#64B5F6' })
+        .render();
+
+      // Video Followers Chart
+      const videoFollowersData = [
+        { month: 'Jan', a: 800, b: 600, c: 400, d: 300 },
+        { month: 'Feb', a: 1200, b: 900, c: 550, d: 400 },
+        { month: 'Mar', a: 1600, b: 1200, c: 700, d: 500 },
+        { month: 'Apr', a: 2000, b: 1500, c: 850, d: 600 },
+        { month: 'May', a: 2400, b: 1800, c: 1000, d: 700 },
+        { month: 'Jun', a: 2800, b: 2100, c: 1150, d: 800 }
+      ];
+
+      new Recharts.BarChart({
+        width: '100%',
+        height: 250,
+        data: videoFollowersData,
+        margin: { top: 5, right: 30, left: 20, bottom: 5 },
+        container: document.getElementById('videoFollowersChart')
+      }).add(Recharts.CartesianGrid, { strokeDasharray: '3 3', stroke: '#f0f0f0' })
+        .add(Recharts.XAxis, { dataKey: 'month', stroke: '#94A3B8' })
+        .add(Recharts.YAxis, { stroke: '#94A3B8' })
+        .add(Recharts.Tooltip)
+        .add(Recharts.Legend)
+        .add(Recharts.Bar, { dataKey: 'a', name: '视频号A', fill: '#E53E3E' })
+        .add(Recharts.Bar, { dataKey: 'b', name: '视频号B', fill: '#DD6B20' })
+        .add(Recharts.Bar, { dataKey: 'c', name: '视频号C', fill: '#D69E2E' })
+        .add(Recharts.Bar, { dataKey: 'd', name: '视频号D', fill: '#38A169' })
+        .render();
+
+      // KPI Gauge Chart
+      const kpiGaugeData = [
+        { name: '达成率', value: 87 },
+        { name: '未达成', value: 13 }
+      ];
+
+      const kpiColors = ['#38A169', '#E2E8F0'];
+
+      new Recharts.PieChart({
+        width: '100%',
+        height: 200,
+        container: document.getElementById('kpiGaugeChart')
+      }).add(Recharts.Pie, {
+        data: kpiGaugeData,
+        cx: '50%',
+        cy: '70%',
+        innerRadius: 40,
+        outerRadius: 70,
+        startAngle: 180,
+        endAngle: 0,
+        dataKey: 'value'
+      }).render();
+
+      // Actual vs KPI Chart
+      const actualVsKpiData = [
+        { month: 'Jan', actual: 1200, kpi: 1000 },
+        { month: 'Feb', actual: 1500, kpi: 1300 },
+        { month: 'Mar', actual: 1800, kpi: 1600 },
+        { month: 'Apr', actual: 2100, kpi: 1900 },
+        { month: 'May', actual: 2400, kpi: 2200 },
+        { month: 'Jun', actual: 2700, kpi: 2500 }
+      ];
+
+      new Recharts.LineChart({
+        width: '100%',
+        height: 200,
+        data: actualVsKpiData,
+        margin: { top: 5, right: 30, left: 20, bottom: 5 },
+        container: document.getElementById('actualVsKpiChart')
+      }).add(Recharts.CartesianGrid, { strokeDasharray: '3 3', stroke: '#f0f0f0' })
+        .add(Recharts.XAxis, { dataKey: 'month', stroke: '#94A3B8' })
+        .add(Recharts.YAxis, { stroke: '#94A3B8' })
+        .add(Recharts.Tooltip)
+        .add(Recharts.Legend)
+        .add(Recharts.Line, {
+          type: 'monotone',
+          dataKey: 'actual',
+          name: 'Actual',
+          stroke: '#38A169',
+          strokeWidth: 2,
+          fill: 'rgba(56, 161, 105, 0.1)',
+          dot: false
+        })
+        .add(Recharts.Line, {
+          type: 'monotone',
+          dataKey: 'kpi',
+          name: 'KPI',
+          stroke: '#0F4C81',
+          strokeWidth: 2,
+          strokeDasharray: '5 5',
+          dot: false
+        })
+        .render();
+
+      // Professional Title Chart 1
+      const professionalTitleData = [
+        { name: '医生', value: 45 },
+        { name: '护士', value: 25 },
+        { name: '医技', value: 15 },
+        { name: '其他工作人员', value: 10 },
+        { name: '管理层', value: 5 }
+      ];
+
+      const professionalColors = ['#0F4C81', '#3A7CA5', '#1E88E5', '#64B5F6', '#90CAF9'];
+
+      new Recharts.PieChart({
+        width: '100%',
+        height: 200,
+        container: document.getElementById('professionalTitleChart1')
+      }).add(Recharts.Pie, {
+        data: professionalTitleData,
+        cx: '50%',
+        cy: '50%',
+        innerRadius: 40,
+        outerRadius: 60,
+        dataKey: 'value'
+      }).add(Recharts.Tooltip, { formatter: (value) => `${value}%` })
+        .add(Recharts.Legend, { layout: 'horizontal', verticalAlign: 'bottom', align: 'center' })
+        .render();
+
+      // City Level Chart 1
+      const cityLevelData = [
+        { name: '一线城市', value: 40 },
+        { name: '二线城市', value: 30 },
+        { name: '三线城市', value: 20 },
+        { name: '四线及以下', value: 10 }
+      ];
+
+      const cityColors = ['#0F4C81', '#3A7CA5', '#1E88E5', '#64B5F6'];
+
+      new Recharts.BarChart({
+        width: '100%',
+        height: 200,
+        data: cityLevelData,
+        layout: 'vertical',
+        margin: { top: 5, right: 30, left: 40, bottom: 5 },
+        container: document.getElementById('cityLevelChart1')
+      }).add(Recharts.CartesianGrid, { strokeDasharray: '3 3', stroke: '#f0f0f0', horizontal: false })
+        .add(Recharts.XAxis, { type: 'number', stroke: '#94A3B8', tickFormatter: (value) => `${value}%` })
+        .add(Recharts.YAxis, { type: 'category', dataKey: 'name', stroke: '#94A3B8' })
+        .add(Recharts.Tooltip, { formatter: (value) => `${value}%` })
+        .add(Recharts.Bar, { dataKey: 'value', radius: [0, 4, 4, 0] })
+        .render();
+
+      // Hospital Level Chart 1
+      const hospitalLevelData = [
+        { name: '三级医院', value: 55 },
+        { name: '二级医院', value: 30 },
+        { name: '一级医院', value: 10 },
+        { name: '其他', value: 5 }
+      ];
+
+      const hospitalColors = ['#E53E3E', '#DD6B20', '#D69E2E', '#38A169'];
+
+      new Recharts.BarChart({
+        width: '100%',
+        height: 200,
+        data: hospitalLevelData,
+        margin: { top: 5, right: 30, left: 20, bottom: 5 },
+        container: document.getElementById('hospitalLevelChart1')
+      }).add(Recharts.CartesianGrid, { strokeDasharray: '3 3', stroke: '#f0f0f0', vertical: false })
+        .add(Recharts.XAxis, { dataKey: 'name', stroke: '#94A3B8' })
+        .add(Recharts.YAxis, { stroke: '#94A3B8', tickFormatter: (value) => `${value}%` })
+        .add(Recharts.Tooltip, { formatter: (value) => `${value}%` })
+        .add(Recharts.Bar, { dataKey: 'value', radius: [4, 4, 0, 0] })
+        .render();
+
+      // Department Chart 1
+      const departmentData = [
+        { name: '内科', value: 32.5 },
+        { name: '外科', value: 21.6 },
+        { name: '儿科', value: 14.6 },
+        { name: '妇产科', value: 12.3 },
+        { name: '其他科室', value: 19.1 }
+      ];
+
+      const departmentColors = ['#0F4C81', '#3A7CA5', '#1E88E5', '#64B5F6', '#90CAF9'];
+
+      new Recharts.PieChart({
+        width: '100%',
+        height: 200,
+        container: document.getElementById('departmentChart1')
+      }).add(Recharts.Pie, {
+        data: departmentData,
+        cx: '50%',
+        cy: '50%',
+        outerRadius: 60,
+        dataKey: 'value',
+        label: ({ name, percent }) => `${name} ${(percent * 100).toFixed(1)}%`
+      }).add(Recharts.Tooltip, { formatter: (value) => `${value}%` })
+        .add(Recharts.Legend, { layout: 'horizontal', verticalAlign: 'bottom', align: 'center' })
+        .render();
+
+      // Professional Title Chart 2
+      new Recharts.PieChart({
+        width: '100%',
+        height: 200,
+        container: document.getElementById('professionalTitleChart2')
+      }).add(Recharts.Pie, {
+        data: professionalTitleData,
+        cx: '50%',
+        cy: '50%',
+        innerRadius: 40,
+        outerRadius: 60,
+        dataKey: 'value'
+      }).add(Recharts.Tooltip, { formatter: (value) => `${value}%` })
+        .add(Recharts.Legend, { layout: 'horizontal', verticalAlign: 'bottom', align: 'center' })
+        .render();
+
+      // City Level Chart 2
+      new Recharts.BarChart({
+        width: '100%',
+        height: 200,
+        data: cityLevelData,
+        layout: 'vertical',
+        margin: { top: 5, right: 30, left: 40, bottom: 5 },
+        container: document.getElementById('cityLevelChart2')
+      }).add(Recharts.CartesianGrid, { strokeDasharray: '3 3', stroke: '#f0f0f0', horizontal: false })
+        .add(Recharts.XAxis, { type: 'number', stroke: '#94A3B8', tickFormatter: (value) => `${value}%` })
+        .add(Recharts.YAxis, { type: 'category', dataKey: 'name', stroke: '#94A3B8' })
+        .add(Recharts.Tooltip, { formatter: (value) => `${value}%` })
+        .add(Recharts.Bar, { dataKey: 'value', radius: [0, 4, 4, 0] })
+        .render();
+
+      // Hospital Level Chart 2
+      new Recharts.BarChart({
+        width: '100%',
+        height: 200,
+        data: hospitalLevelData,
+        margin: { top: 5, right: 30, left: 20, bottom: 5 },
+        container: document.getElementById('hospitalLevelChart2')
+      }).add(Recharts.CartesianGrid, { strokeDasharray: '3 3', stroke: '#f0f0f0', vertical: false })
+        .add(Recharts.XAxis, { dataKey: 'name', stroke: '#94A3B8' })
+        .add(Recharts.YAxis, { stroke: '#94A3B8', tickFormatter: (value) => `${value}%` })
+        .add(Recharts.Tooltip, { formatter: (value) => `${value}%` })
+        .add(Recharts.Bar, { dataKey: 'value', radius: [4, 4, 0, 0] })
+        .render();
+
+      // Department Chart 2
+      new Recharts.PieChart({
+        width: '100%',
+        height: 200,
+        container: document.getElementById('departmentChart2')
+      }).add(Recharts.Pie, {
+        data: departmentData,
+        cx: '50%',
+        cy: '50%',
+        outerRadius: 60,
+        dataKey: 'value',
+        label: ({ name, percent }) => `${name} ${(percent * 100).toFixed(1)}%`
+      }).add(Recharts.Tooltip, { formatter: (value) => `${value}%` })
+        .add(Recharts.Legend, { layout: 'horizontal', verticalAlign: 'bottom', align: 'center' })
+        .render();
+
+      // Greater China MQL Chart
+      const greaterChinaMqlData = [
+        { name: 'CN', value: 263 },
+        { name: 'HK', value: 15 },
+        { name: 'TW', value: 12 }
+      ];
+
+      const greaterChinaColors = ['#3498db', '#2c3e50', '#e67e22'];
+      const total = greaterChinaMqlData.reduce((sum, item) => sum + item.value, 0);
+
+      new Recharts.PieChart({
+        width: '100%',
+        height: 350,
+        container: document.getElementById('greaterChinaMqlChart')
+      }).add(Recharts.Pie, {
+        data: greaterChinaMqlData,
+        cx: '50%',
+        cy: '50%',
+        innerRadius: 70,
+        outerRadius: 120,
+        paddingAngle: 2,
+        dataKey: 'value',
+        label: ({ name, value, percent }) => `${name}: ${value} (${(percent * 100).toFixed(1)}%)`,
+        labelLine: true
+      }).add(Recharts.Tooltip, { formatter: (value) => [`${value}`, 'MQL数量'] })
+        .add(Recharts.Legend, { layout: 'horizontal', verticalAlign: 'bottom', align: 'center' })
+        .render();
+
+      // 添加中心总计文本
+      const mqlChartContainer = document.getElementById('greaterChinaMqlChart');
+      const totalText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      totalText.setAttribute("x", "50%");
+      totalText.setAttribute("y", "45%");
+      totalText.setAttribute("text-anchor", "middle");
+      totalText.setAttribute("dominant-baseline", "middle");
+      totalText.setAttribute("font-size", "28");
+      totalText.setAttribute("font-weight", "bold");
+      totalText.setAttribute("fill", "#0F4C81");
+      totalText.textContent = total.toString();
+      
+      const labelText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      labelText.setAttribute("x", "50%");
+      labelText.setAttribute("y", "60%");
+      labelText.setAttribute("text-anchor", "middle");
+      labelText.setAttribute("dominant-baseline", "middle");
+      labelText.setAttribute("font-size", "14");
+      labelText.setAttribute("fill", "#666");
+      labelText.textContent = "总计";
+      
+      // 确保在渲染后添加文本元素
+      setTimeout(() => {
+        const svgElement = mqlChartContainer.querySelector('svg');
+        if (svgElement) {
+          svgElement.appendChild(totalText);
+          svgElement.appendChild(labelText);
+        }
+      }, 100);
+
+      // Funnel Chart
+      const funnelData = [
+        { name: 'Engaged Traffic', value: 125432 },
+        { name: 'Leads', value: 12543 },
+        { name: 'MQLs', value: 5678 },
+        { name: 'Opp. Value', value: 3245 },
+        { name: 'OIT', value: 1876 }
+      ];
+
+      // 格式化Y轴数据，显示千分位
+      const formatYAxis = (value) => {
+        if (value >= 1000) {
+          return (value / 1000).toFixed(0) + 'k';
+        }
+        return value;
+      };
+
+      new Recharts.BarChart({
+        width: '100%',
+        height: 400,
+        data: funnelData,
+        margin: { top: 20, right: 30, left: 30, bottom: 40 },
+        container: document.getElementById('funnelChart')
+      }).add(Recharts.CartesianGrid, { strokeDasharray: '3 3', stroke: '#f0f0f0', vertical: false })
+        .add(Recharts.XAxis, { 
+          dataKey: 'name', 
+          stroke: '#94A3B8', 
+          tick: { fontSize: 12 },
+          angle: -45,
+          textAnchor: 'end',
+          height: 80
+        })
+        .add(Recharts.YAxis, { 
+          stroke: '#94A3B8', 
+          tickFormatter: formatYAxis,
+          tick: { fontSize: 12 }
+        })
+        .add(Recharts.Tooltip, { 
+          formatter: (value, name, props) => {
+            if (!props || props.index === undefined) {
+              return [
+                `${(value).toLocaleString() || ''}`,
+                name
+              ];
+            }
+            // Calculate conversion rate
+            const getConversionRate = (index) => {
+              if (index === 0 || !funnelData[index] || !funnelData[index - 1]) return '-';
+              const rate = (funnelData[index].value / funnelData[index - 1].value) * 100;
+              return `${rate.toFixed(1)}%`;
+            };
+            const conversionRate = getConversionRate(props.index);
+            return [
+              `${(value).toLocaleString()}`,
+              name,
+              `Conversion Rate: ${conversionRate}`
+            ];
+          } 
+        })
+        .add(Recharts.Bar, { dataKey: 'value', radius: [4, 4, 0, 0] })
+        .render();
+    });
+  </script>
+</body>
+</html>
+</html>
