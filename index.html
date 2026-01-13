@@ -10,16 +10,8 @@
       crossorigin="anonymous"
     />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/recharts@2.15.1/umd/Recharts.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/framer-motion@11.0.0/dist/framer-motion.umd.min.js"></script>
-    <style type="text/tailwindcss">
-      @layer utilities {
-        .content-auto {
-          content-visibility: auto;
-        }
-      }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
     <script>
       tailwind.config = {
         theme: {
@@ -34,10 +26,34 @@
             fontFamily: {
               sans: ['Inter', 'system-ui', 'sans-serif'],
             },
+            animation: {
+              'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+            },
+            keyframes: {
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+            },
           },
-        }
+        },
       }
     </script>
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .content-auto {
+          content-visibility: auto;
+        }
+        /* 简单的动画延迟类 */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+        .delay-600 { animation-delay: 600ms; }
+        .delay-700 { animation-delay: 700ms; }
+      }
+    </style>
   </head>
   <body class="min-h-screen bg-gray-50 font-sans">
     <div class="min-h-screen bg-gray-50 p-4 md:p-6 lg:p-8">
@@ -50,15 +66,8 @@
       </header>
 
       <div class="dashboard-container space-y-6">
-        {/* KPI Cards - Top section */}
         <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
-          <!-- Total Events -->
-          <motion.div 
-            class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition-shadow border border-gray-100"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <div class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition-shadow border border-gray-100 animate-fade-in-up opacity-0">
             <div class="flex items-center justify-between mb-3">
               <h3 class="text-sm font-medium text-gray-500">Total Events</h3>
               <div class="bg-gray-100 p-2 rounded-lg text-gray-600">
@@ -66,15 +75,9 @@
               </div>
             </div>
             <div class="kpi-value text-2xl font-bold text-gray-800">48</div>
-          </motion.div>
+          </div>
 
-          {/* Total Participants */}
-          <motion.div 
-            class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition-shadow border border-gray-100"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
+          <div class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition-shadow border border-gray-100 animate-fade-in-up delay-100 opacity-0">
             <div class="flex items-center justify-between mb-3">
               <h3 class="text-sm font-medium text-gray-500">Total Participants</h3>
               <div class="bg-gray-100 p-2 rounded-lg text-gray-600">
@@ -82,15 +85,9 @@
               </div>
             </div>
             <div class="kpi-value text-2xl font-bold text-gray-800">3,200</div>
-          </motion.div>
+          </div>
 
-          {/* New Contacts */}
-          <motion.div 
-            class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition-shadow border border-gray-100"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
+          <div class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition-shadow border border-gray-100 animate-fade-in-up delay-200 opacity-0">
             <div class="flex items-center justify-between mb-3">
               <h3 class="text-sm font-medium text-gray-500">New Contacts</h3>
               <div class="bg-gray-100 p-2 rounded-lg text-gray-600">
@@ -101,15 +98,9 @@
             <div class="text-xs mt-1 text-green-500">
               KPI: 85%
             </div>
-          </motion.div>
+          </div>
 
-          {/* Total Leads */}
-          <motion.div 
-            class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition-shadow border border-gray-100"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
+          <div class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition-shadow border border-gray-100 animate-fade-in-up delay-300 opacity-0">
             <div class="flex items-center justify-between mb-3">
               <h3 class="text-sm font-medium text-gray-500">Total Leads</h3>
               <div class="bg-gray-100 p-2 rounded-lg text-gray-600">
@@ -117,531 +108,6 @@
               </div>
             </div>
             <div class="kpi-value text-2xl font-bold text-gray-800">2,800</div>
-          </motion.div>
-
-          {/* Total MQL */}
-          <motion.div 
-            class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition-shadow border border-gray-100"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-sm font-medium text-gray-500">Total MQL</h3>
-              <div class="bg-gray-100 p-2 rounded-lg text-gray-600">
-                <i class="fa-solid fa-lead-pencil text-purple-500"></i>
-              </div>
-            </div>
-            <div class="kpi-value text-2xl font-bold text-gray-800">300</div>
-          </motion.div>
-
-          {/* Total Oppty */}
-          <motion.div 
-            class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition-shadow border border-gray-100"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-          >
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-sm font-medium text-gray-500">Total Oppty</h3>
-              <div class="bg-gray-100 p-2 rounded-lg text-gray-600">
-                <i class="fa-solid fa-chart-line text-rose-500"></i>
-              </div>
-            </div>
-            <div class="kpi-value text-2xl font-bold text-gray-800">50</div>
-          </motion.div>
-        </section>
-
-        {/* Lead Conversion - Second section */}
-        <section class="space-y-6">
-          <h2 class="text-xl font-bold text-gray-800 flex items-center">
-            <i class="fa-solid fa-filter text-blue-600 mr-2"></i>
-            Lead Conversion (Contacts/MQL/Oppty)
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
-            <motion.div 
-              class="bg-white rounded-xl shadow-sm p-4 border border-gray-100"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-            >
-              <h3 class="text-lg font-semibold text-gray-800 mb-4">Monthly Conversion Trend</h3>
-              <div class="h-[300px]" id="monthlyConversionChart"></div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Filter Bar - Placed after Lead Conversion */}
-        <div class="bg-white rounded-xl shadow-sm p-4 mb-6">
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {/* Month Filter */}
-            <div>
-              <label class="block text-xs font-medium text-gray-500 mb-1">Month</label>
-              <select
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-                id="monthFilter"
-              >
-                <option value="All Months">All Months</option>
-                <option value="January">January</option>
-                <option value="February">February</option>
-                <option value="March">March</option>
-                <option value="April">April</option>
-                <option value="May">May</option>
-                <option value="June">June</option>
-                <option value="July">July</option>
-                <option value="August">August</option>
-                <option value="September">September</option>
-                <option value="October">October</option>
-                <option value="November">November</option>
-                <option value="December">December</option>
-              </select>
-            </div>
-
-            {/* Year Filter */}
-            <div>
-              <label class="block text-xs font-medium text-gray-500 mb-1">Year</label>
-              <select
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-                id="yearFilter"
-              >
-                <option value="2023">2023</option>
-                <option value="2024">2024</option>
-                <option value="2025" selected>2025</option>
-                <option value="2026">2026</option>
-              </select>
-            </div>
-
-            {/* BU Filter */}
-            <div>
-              <label class="block text-xs font-medium text-gray-500 mb-1">BU</label>
-              <select
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-                id="buFilter"
-              >
-                <option value="All BUs">All BUs</option>
-                <option value="BU1">BU1</option>
-                <option value="BU2">BU2</option>
-                <option value="BU3">BU3</option>
-                <option value="BU4">BU4</option>
-              </select>
-            </div>
-
-            {/* Event Type Filter */}
-            <div>
-              <label class="block text-xs font-medium text-gray-500 mb-1">Event Type</label>
-              <select
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-                id="eventTypeFilter"
-              >
-                <option value="All Event Types">All Event Types</option>
-                <option value="National Exhibition">National Exhibition</option>
-                <option value="NPI launch">NPI launch</option>
-                <option value="Academic Forum">Academic Forum</option>
-                <option value="Customer Event">Customer Event</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        {/* Event Efficiency */}
-        <section class="space-y-6">
-          <h2 class="text-xl font-bold text-gray-800 flex items-center">
-            <i class="fa-solid fa-chart-pie text-blue-600 mr-2"></i>
-            Event Efficiency
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
-            <motion.div 
-              class="bg-white rounded-xl shadow-sm p-4 border border-gray-100"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <h3 class="text-lg font-semibold text-gray-800 mb-4">Event Type Distribution</h3>
-              <div class="h-[300px]" id="eventTypeChart"></div>
-            </motion.div>
           </div>
 
-          {/* Attendee Analysis */}
-          <motion.div 
-            class="bg-white rounded-xl shadow-sm p-4 border border-gray-100"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-          >
-            <h3 class="text-lg font-semibold text-gray-800 mb-4">Actual Attendee HCP Analysis</h3>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Personal Distribution */}
-              <div class="bg-gray-50 p-3 rounded-lg">
-                <h4 class="text-md font-medium text-gray-700 mb-3">Personal Distribution</h4>
-                <div class="h-[200px]" id="personalDistributionChart"></div>
-              </div>
-
-              {/* City Level Distribution */}
-              <div class="bg-gray-50 p-3 rounded-lg">
-                <h4 class="text-md font-medium text-gray-700 mb-3">City Level Distribution</h4>
-                <div class="h-[200px]" id="cityLevelChart"></div>
-              </div>
-
-              {/* Hospital Class Distribution */}
-              <div class="bg-gray-50 p-3 rounded-lg">
-                <h4 class="text-md font-medium text-gray-700 mb-3">Hospital Class Distribution</h4>
-                <div class="h-[200px]" id="hospitalClassChart"></div>
-              </div>
-
-              {/* TA Distribution */}
-              <div class="bg-gray-50 p-3 rounded-lg">
-                <h4 class="text-md font-medium text-gray-700 mb-3">TA Distribution (Top 5)</h4>
-                <div class="h-[200px]" id="taDistributionChart"></div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Events Tracking Table */}
-          <motion.div
-            class="bg-white rounded-xl shadow-sm p-4 border border-gray-100"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-          >
-            <h3 class="text-lg font-semibold text-gray-800 mb-4">Events Tracking</h3>
-            <div class="overflow-x-auto">
-              <table class="min-w-full divide-y divide-gray-200">
-                <thead>
-                  <tr>
-                    <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Event Name</th>
-                    <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Event Type</th>
-                    <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                    <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actual Status</th>
-                    <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Planned Invitees</th>
-                    <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contacts</th>
-                    <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Leads</th>
-                    <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">MQL</th>
-                    <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Oppty</th>
-                    <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Engage KOL</th>
-                  </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                  <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">Sample Event 1</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">Academic Forum</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">2023-10-01</td>
-                    <td class="px-4 py-3 whitespace-nowrap">
-                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        Completed
-                      </span>
-                    </td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">235</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">80</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">75</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">20</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">5</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">12</td>
-                  </tr>
-                  <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">Sample Event 2</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">NPI launch</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">2023-10-15</td>
-                    <td class="px-4 py-3 whitespace-nowrap">
-                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        Completed
-                      </span>
-                    </td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">167</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">60</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">55</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">15</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">3</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">8</td>
-                  </tr>
-                  <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">Sample Event 3</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">National Exhibition</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">2023-11-05</td>
-                    <td class="px-4 py-3 whitespace-nowrap">
-                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        Completed
-                      </span>
-                    </td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">366</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">120</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">110</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">30</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">7</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">15</td>
-                  </tr>
-                  <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">Sample Event 4</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">Customer Event</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">2023-11-20</td>
-                    <td class="px-4 py-3 whitespace-nowrap">
-                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        Completed
-                      </span>
-                    </td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">205</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">75</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">70</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">22</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">4</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">10</td>
-                  </tr>
-                  <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">Sample Event 5</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">Academic Forum</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">2023-12-08</td>
-                    <td class="px-4 py-3 whitespace-nowrap">
-                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
-                        Not Held
-                      </span>
-                    </td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">175</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">0</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">0</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">0</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">0</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">0</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="mt-4 flex justify-between items-center text-sm text-gray-500">
-              <div>Showing 1 to 5 of 12 entries</div>
-              <div class="flex space-x-1">
-                <button
-                  class="px-3 py-1 rounded border bg-white text-gray-600 hover:bg-gray-50 opacity-50"
-                  disabled
-                >
-                  Previous
-                </button>
-                <button class="px-3 py-1 rounded border bg-blue-50 text-blue-600">1</button>
-                <button
-                  class="px-3 py-1 rounded border bg-white text-gray-600 hover:bg-gray-50"
-                >
-                  2
-                </button>
-                <button
-                  class="px-3 py-1 rounded border bg-white text-gray-600 hover:bg-gray-50"
-                >
-                  3
-                </button>
-                <button
-                  class="px-3 py-1 rounded border bg-white text-gray-600 hover:bg-gray-50"
-                >
-                  Next
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        </section>
-      </div>
-
-      <footer class="mt-12 text-center text-gray-500 text-sm">
-        <p>© 2025 Event Marketing Dashboard. All rights reserved.</p>
-      </footer>
-    </div>
-
-    <script>
-      // Wait for DOM to be fully loaded
-      document.addEventListener('DOMContentLoaded', function() {
-        // Initialize Framer Motion
-        const { motion } = window;
-        
-        // Data for charts
-        const monthlyConversionData = [
-          { name: 'Jan', Contacts: 120, MQL: 30, Oppty: 5 },
-          { name: 'Feb', Contacts: 150, MQL: 35, Oppty: 6 },
-          { name: 'Mar', Contacts: 180, MQL: 40, Oppty: 8 },
-          { name: 'Apr', Contacts: 220, MQL: 45, Oppty: 9 },
-          { name: 'May', Contacts: 250, MQL: 50, Oppty: 10 },
-          { name: 'Jun', Contacts: 280, MQL: 55, Oppty: 11 },
-          { name: 'Jul', Contacts: 320, MQL: 60, Oppty: 12 },
-          { name: 'Aug', Contacts: 350, MQL: 65, Oppty: 13 },
-          { name: 'Sep', Contacts: 380, MQL: 70, Oppty: 14 },
-          { name: 'Oct', Contacts: 420, MQL: 75, Oppty: 15 },
-        ];
-        
-        const eventTypeData = [
-          { name: 'National Exhibition', value: 12, color: '#3b82f6' },
-          { name: 'NPI launch', value: 18, color: '#10b981' },
-          { name: 'Academic Forum', value: 10, color: '#f59e0b' },
-          { name: 'Customer Event', value: 8, color: '#8b5cf6' },
-        ];
-        
-        const personalDistributionData = [
-          { name: 'Doctor', value: 45, color: '#1e40af' },
-          { name: 'Nurse', value: 20, color: '#3b82f6' },
-          { name: 'Technician', value: 15, color: '#93c5fd' },
-          { name: 'Other Staff', value: 10, color: '#bfdbfe' },
-          { name: 'Management', value: 10, color: '#dbeafe' },
-        ];
-        
-        const cityLevelData = [
-          { name: 'Tier 1 City', value: 40 },
-          { name: 'Tier 2 City', value: 30 },
-          { name: 'Tier 3 City', value: 20 },
-          { name: 'Tier 4 & Below', value: 10 },
-        ];
-        
-        const hospitalClassData = [
-          { name: 'Class I', value: 55 },
-          { name: 'Class II', value: 30 },
-          { name: 'Class III', value: 10 },
-          { name: 'Others', value: 5 },
-        ];
-        
-        const taDistributionData = [
-          { name: 'Internal Medicine', value: 35, color: '#1e40af' },
-          { name: 'Surgery', value: 25, color: '#3b82f6' },
-          { name: 'Pediatrics', value: 15, color: '#93c5fd' },
-          { name: 'Obstetrics & Gynecology', value: 12.3, color: '#bfdbfe' },
-          { name: 'Other Departments', value: 12.7, color: '#dbeafe' },
-        ];
-        
-        // Initialize Monthly Conversion Chart
-        const monthlyConversionChart = new Recharts.LineChart({
-          width: '100%',
-          height: 300,
-          data: monthlyConversionData,
-          margin: { top: 20, right: 30, left: 0, bottom: 5 }
-        });
-        
-        monthlyConversionChart.add(new Recharts.CartesianGrid({ strokeDasharray: '3 3' }));
-        monthlyConversionChart.add(new Recharts.XAxis({ dataKey: 'name' }));
-        monthlyConversionChart.add(new Recharts.YAxis());
-        monthlyConversionChart.add(new Recharts.Tooltip());
-        monthlyConversionChart.add(new Recharts.Legend());
-        monthlyConversionChart.add(new Recharts.Line({ 
-          type: 'monotone', 
-          dataKey: 'Contacts', 
-          stroke: '#60a5fa', 
-          strokeWidth: 2, 
-          dot: { r: 4 }, 
-          activeDot: { r: 6 } 
-        }));
-        monthlyConversionChart.add(new Recharts.Line({ 
-          type: 'monotone', 
-          dataKey: 'MQL', 
-          stroke: '#34d399', 
-          strokeWidth: 2, 
-          dot: { r: 4 }, 
-          activeDot: { r: 6 } 
-        }));
-        monthlyConversionChart.add(new Recharts.Line({ 
-          type: 'monotone', 
-          dataKey: 'Oppty', 
-          stroke: '#fbbf24', 
-          strokeWidth: 2, 
-          dot: { r: 4 }, 
-          activeDot: { r: 6 } 
-        }));
-        
-        monthlyConversionChart.render(document.getElementById('monthlyConversionChart'));
-        
-        // Initialize Event Type Distribution Chart
-        const eventTypeChart = new Recharts.PieChart({
-          width: '100%',
-          height: 300
-        });
-        
-        eventTypeChart.add(new Recharts.Pie({
-          data: eventTypeData,
-          cx: '50%',
-          cy: '50%',
-          labelLine: false,
-          outerRadius: 100,
-          fill: '#8884d8',
-          dataKey: 'value',
-          label: ({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`
-        }));
-        
-        eventTypeChart.add(new Recharts.Tooltip({ formatter: (value) => [`${value} events`, 'Quantity'] }));
-        eventTypeChart.add(new Recharts.Legend({ verticalAlign: 'bottom', height: 36 }));
-        
-        eventTypeChart.render(document.getElementById('eventTypeChart'));
-        
-        // Initialize Personal Distribution Chart
-        const personalDistributionChart = new Recharts.PieChart({
-          width: '100%',
-          height: 200
-        });
-        
-        personalDistributionChart.add(new Recharts.Pie({
-          data: personalDistributionData,
-          cx: '50%',
-          cy: '50%',
-          outerRadius: 80,
-          fill: '#8884d8',
-          dataKey: 'value',
-          label: ({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`
-        }));
-        
-        personalDistributionChart.add(new Recharts.Tooltip({ formatter: (value) => [`${value}%`, 'Percentage'] }));
-        
-        personalDistributionChart.render(document.getElementById('personalDistributionChart'));
-        
-        // Initialize City Level Chart
-        const cityLevelChart = new Recharts.BarChart({
-          width: '100%',
-          height: 200,
-          data: cityLevelData,
-          layout: 'vertical',
-          margin: { top: 5, right: 30, left: 30, bottom: 5 }
-        });
-        
-        cityLevelChart.add(new Recharts.CartesianGrid({ strokeDasharray: '3 3' }));
-        cityLevelChart.add(new Recharts.XAxis({ type: 'number', domain: [0, 40], tickFormatter: (value) => `${value}%` }));
-        cityLevelChart.add(new Recharts.YAxis({ dataKey: 'name', type: 'category', width: 100 }));
-        cityLevelChart.add(new Recharts.Tooltip({ formatter: (value) => [`${value}%`, 'Percentage'] }));
-        cityLevelChart.add(new Recharts.Bar({ dataKey: 'value', fill: '#3b82f6', radius: [0, 4, 4, 0] }));
-        
-        cityLevelChart.render(document.getElementById('cityLevelChart'));
-        
-        // Initialize Hospital Class Chart
-        const hospitalClassChart = new Recharts.BarChart({
-          width: '100%',
-          height: 200,
-          data: hospitalClassData,
-          margin: { top: 5, right: 30, left: 30, bottom: 5 }
-        });
-        
-        hospitalClassChart.add(new Recharts.CartesianGrid({ strokeDasharray: '3 3' }));
-        hospitalClassChart.add(new Recharts.XAxis({ dataKey: 'name' }));
-        hospitalClassChart.add(new Recharts.YAxis({ domain: [0, 60], tickFormatter: (value) => `${value}%` }));
-        hospitalClassChart.add(new Recharts.Tooltip({ formatter: (value) => [`${value}%`, 'Percentage'] }));
-        hospitalClassChart.add(new Recharts.Bar({ dataKey: 'value', fill: '#ef4444', radius: [4, 4, 0, 0] }));
-        
-        hospitalClassChart.render(document.getElementById('hospitalClassChart'));
-        
-        // Initialize TA Distribution Chart
-        const taDistributionChart = new Recharts.PieChart({
-          width: '100%',
-          height: 200
-        });
-        
-        taDistributionChart.add(new Recharts.Pie({
-          data: taDistributionData,
-          cx: '50%',
-          cy: '50%',
-          outerRadius: 80,
-          fill: '#8884d8',
-          dataKey: 'value',
-          label: ({ name, value }) => `${name} ${value}%`
-        }));
-        
-        taDistributionChart.add(new Recharts.Tooltip({ formatter: (value) => [`${value}%`, 'Percentage'] }));
-        
-        taDistributionChart.render(document.getElementById('taDistributionChart'));
-        
-        // Add filter change handlers
-        const filterElements = ['monthFilter', 'yearFilter', 'buFilter', 'eventTypeFilter'];
-        filterElements.forEach(elementId => {
-          document.getElementById(elementId).addEventListener('change', function() {
-            console.log(`${elementId} changed to: ${this.value}`);
-            // Here you would typically update the charts with filtered data
-          });
-        });
-      });
-    </script>
-  </body>
-</html>
+          <div class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition-shadow border
