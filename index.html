@@ -18,10 +18,10 @@
           extend: {
             colors: {
               primary: '#3b82f6',
-              secondary: '#10b981',
-              accent: '#f59e0b',
+              success: '#10b981',
+              warning: '#f59e0b',
               danger: '#ef4444',
-              info: '#8b5cf6',
+              purple: '#8b5cf6',
             },
             fontFamily: {
               sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -32,317 +32,438 @@
     </script>
   </head>
   <body class="bg-gray-50 font-sans text-gray-900">
-    <div class="min-h-screen p-4 md:p-6 lg:p-8 max-w-7xl mx-auto">
+    <div class="min-h-screen p-4 md:p-6 lg:p-8 max-w-[1600px] mx-auto">
       
-      <header class="mb-8">
-        <h1 class="text-2xl md:text-3xl font-bold text-gray-800 flex items-center flex-wrap">
+      <header class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-800 flex items-center">
           <i class="fa-solid fa-calendar-check text-blue-600 mr-3"></i>
           Event Marketing Dashboard
         </h1>
-        <p class="text-gray-600 mt-2 text-sm md:text-base">Comprehensive analysis and monitoring of your marketing event performance</p>
+        <p class="text-gray-500 mt-1 text-sm">Comprehensive analysis and monitoring of your marketing event performance</p>
       </header>
 
       <div class="space-y-6">
         
         <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
-          <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex flex-col justify-between h-full">
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-sm font-medium text-gray-500">Total Events</h3>
-              <div class="bg-indigo-50 p-2 rounded-lg text-indigo-600">
-                <i class="fa-solid fa-calendar"></i>
+          <div class="bg-white rounded-xl shadow-sm p-5 border border-gray-100">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Total Events</h3>
+              <div class="bg-indigo-50 p-1.5 rounded text-indigo-500">
+                <i class="fa-solid fa-calendar text-sm"></i>
               </div>
             </div>
             <div class="text-2xl font-bold text-gray-800">48</div>
           </div>
 
-          <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex flex-col justify-between h-full">
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-sm font-medium text-gray-500">Participants</h3>
-              <div class="bg-green-50 p-2 rounded-lg text-green-600">
-                <i class="fa-solid fa-users"></i>
+          <div class="bg-white rounded-xl shadow-sm p-5 border border-gray-100">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Total Participants</h3>
+              <div class="bg-green-50 p-1.5 rounded text-green-500">
+                <i class="fa-solid fa-users text-sm"></i>
               </div>
             </div>
             <div class="text-2xl font-bold text-gray-800">3,200</div>
           </div>
 
-          <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex flex-col justify-between h-full">
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-sm font-medium text-gray-500">New Contacts</h3>
-              <div class="bg-amber-50 p-2 rounded-lg text-amber-600">
-                <i class="fa-solid fa-address-book"></i>
+          <div class="bg-white rounded-xl shadow-sm p-5 border border-gray-100">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">New Contacts</h3>
+              <div class="bg-yellow-50 p-1.5 rounded text-yellow-600">
+                <i class="fa-solid fa-address-book text-sm"></i>
               </div>
             </div>
             <div class="text-2xl font-bold text-gray-800">1,500</div>
-            <div class="text-xs mt-1 text-green-600 font-medium">KPI: 85%</div>
+            <div class="text-xs mt-1 text-green-500 font-medium">KPI: 85%</div>
           </div>
 
-          <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex flex-col justify-between h-full">
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-sm font-medium text-gray-500">Total Leads</h3>
-              <div class="bg-blue-50 p-2 rounded-lg text-blue-600">
-                <i class="fa-solid fa-user-plus"></i>
+          <div class="bg-white rounded-xl shadow-sm p-5 border border-gray-100">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Total Leads</h3>
+              <div class="bg-blue-50 p-1.5 rounded text-blue-500">
+                <i class="fa-solid fa-user-plus text-sm"></i>
               </div>
             </div>
             <div class="text-2xl font-bold text-gray-800">2,800</div>
           </div>
 
-          <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex flex-col justify-between h-full">
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-sm font-medium text-gray-500">Total MQL</h3>
-              <div class="bg-purple-50 p-2 rounded-lg text-purple-600">
-                <i class="fa-solid fa-lead-pencil"></i>
+          <div class="bg-white rounded-xl shadow-sm p-5 border border-gray-100">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Total MQL</h3>
+              <div class="bg-gray-100 p-1.5 rounded text-gray-500">
+                <i class="fa-solid fa-filter text-sm"></i>
               </div>
             </div>
             <div class="text-2xl font-bold text-gray-800">300</div>
           </div>
 
-          <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex flex-col justify-between h-full">
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-sm font-medium text-gray-500">Total Oppty</h3>
-              <div class="bg-rose-50 p-2 rounded-lg text-rose-600">
-                <i class="fa-solid fa-chart-line"></i>
+          <div class="bg-white rounded-xl shadow-sm p-5 border border-gray-100">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Total Oppty</h3>
+              <div class="bg-red-50 p-1.5 rounded text-red-500">
+                <i class="fa-solid fa-chart-line text-sm"></i>
               </div>
             </div>
             <div class="text-2xl font-bold text-gray-800">50</div>
           </div>
         </section>
 
-        <section class="bg-white rounded-xl shadow-sm p-4 md:p-6 border border-gray-100">
-          <h2 class="text-lg md:text-xl font-bold text-gray-800 flex items-center mb-4">
-            <i class="fa-solid fa-filter text-blue-600 mr-2"></i>
-            Lead Conversion Trend
-          </h2>
-          <div class="relative w-full h-[300px] md:h-[350px]">
-            <canvas id="monthlyConversionChart"></canvas>
+        <section class="space-y-4">
+          <div class="flex items-center text-blue-700 font-semibold">
+            <i class="fa-solid fa-caret-down mr-2"></i>
+            Lead Conversion (Contacts/MQL/Oppty)
+          </div>
+          
+          <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+            <h3 class="text-sm font-semibold text-gray-800 mb-4">Monthly Conversion Trend</h3>
+            <div class="relative w-full h-[300px]">
+              <canvas id="monthlyConversionChart"></canvas>
+            </div>
           </div>
         </section>
 
-        <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100">
+        <div class="bg-gray-100 rounded-lg p-3">
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            <div>
-              <label class="block text-xs font-medium text-gray-500 mb-1">Month</label>
-              <select class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" id="monthFilter">
+            <div class="relative">
+              <label class="absolute -top-2 left-2 bg-gray-100 px-1 text-[10px] font-medium text-gray-500">Month</label>
+              <select class="w-full pl-3 pr-8 py-1.5 bg-gray-200 border-none rounded text-sm text-gray-700 focus:ring-0 cursor-pointer">
                 <option>All Months</option>
-                <option>January</option>
-                <option>February</option>
               </select>
             </div>
-            <div>
-              <label class="block text-xs font-medium text-gray-500 mb-1">Year</label>
-              <select class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" id="yearFilter">
+            <div class="relative">
+               <label class="absolute -top-2 left-2 bg-gray-100 px-1 text-[10px] font-medium text-gray-500">Year</label>
+              <select class="w-full pl-3 pr-8 py-1.5 bg-gray-200 border-none rounded text-sm text-gray-700 focus:ring-0 cursor-pointer">
                 <option selected>2025</option>
-                <option>2026</option>
               </select>
             </div>
-            <div>
-              <label class="block text-xs font-medium text-gray-500 mb-1">BU</label>
-              <select class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" id="buFilter">
+            <div class="relative">
+               <label class="absolute -top-2 left-2 bg-gray-100 px-1 text-[10px] font-medium text-gray-500">BU</label>
+              <select class="w-full pl-3 pr-8 py-1.5 bg-gray-200 border-none rounded text-sm text-gray-700 focus:ring-0 cursor-pointer">
                 <option>All BUs</option>
-                <option>BU1</option>
               </select>
             </div>
-            <div>
-              <label class="block text-xs font-medium text-gray-500 mb-1">Event Type</label>
-              <select class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" id="eventTypeFilter">
+            <div class="relative">
+               <label class="absolute -top-2 left-2 bg-gray-100 px-1 text-[10px] font-medium text-gray-500">Event Type</label>
+              <select class="w-full pl-3 pr-8 py-1.5 bg-gray-200 border-none rounded text-sm text-gray-700 focus:ring-0 cursor-pointer">
                 <option>All Event Types</option>
               </select>
             </div>
           </div>
         </div>
 
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex flex-col">
-            <h3 class="text-lg font-semibold text-gray-800 mb-4">Event Type Distribution</h3>
-            <div class="relative w-full h-[250px] flex-grow">
+        <section class="space-y-4">
+          <div class="flex items-center text-blue-700 font-semibold">
+            <i class="fa-solid fa-chart-pie mr-2"></i>
+            Event Efficiency
+          </div>
+
+          <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+            <h3 class="text-sm font-semibold text-gray-800 mb-2">Event Type Distribution</h3>
+            <div class="relative w-full h-[300px] flex justify-center">
               <canvas id="eventTypeChart"></canvas>
             </div>
           </div>
-
-          <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex flex-col">
-            <h3 class="text-lg font-semibold text-gray-800 mb-4">TA Distribution (Top 5)</h3>
-            <div class="relative w-full h-[250px] flex-grow">
-              <canvas id="taDistributionChart"></canvas>
-            </div>
-          </div>
         </section>
 
-        <section class="bg-white rounded-xl shadow-sm p-4 md:p-6 border border-gray-100">
-          <h3 class="text-lg font-semibold text-gray-800 mb-6">Attendee HCP Analysis</h3>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="flex flex-col">
-              <h4 class="text-sm font-medium text-gray-500 mb-2 text-center">Personal Role</h4>
-              <div class="relative w-full h-[200px]">
+        <section class="space-y-4">
+          <h2 class="text-sm font-bold text-gray-800">Actual Attendee HCP Analysis</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+              <h3 class="text-xs font-medium text-gray-500 mb-4">Personal Distribution</h3>
+              <div class="relative w-full h-[220px] flex justify-center">
                 <canvas id="personalDistributionChart"></canvas>
               </div>
             </div>
-            <div class="flex flex-col">
-              <h4 class="text-sm font-medium text-gray-500 mb-2 text-center">City Tier</h4>
-              <div class="relative w-full h-[200px]">
+
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+              <h3 class="text-xs font-medium text-gray-500 mb-4">City Level Distribution</h3>
+              <div class="relative w-full h-[220px]">
                 <canvas id="cityLevelChart"></canvas>
               </div>
             </div>
-            <div class="flex flex-col">
-              <h4 class="text-sm font-medium text-gray-500 mb-2 text-center">Hospital Class</h4>
-              <div class="relative w-full h-[200px]">
+
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+              <h3 class="text-xs font-medium text-gray-500 mb-4">Hospital Class Distribution</h3>
+              <div class="relative w-full h-[220px]">
                 <canvas id="hospitalClassChart"></canvas>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+              <h3 class="text-xs font-medium text-gray-500 mb-4">TA Distribution (Top 5)</h3>
+              <div class="relative w-full h-[220px] flex justify-center">
+                <canvas id="taDistributionChart"></canvas>
               </div>
             </div>
           </div>
         </section>
 
-        <section class="bg-white rounded-xl shadow-sm p-4 border border-gray-100">
-          <h3 class="text-lg font-semibold text-gray-800 mb-4">Events Tracking</h3>
-          <div class="overflow-x-auto border rounded-lg">
-            <table class="min-w-full divide-y divide-gray-200">
-              <thead class="bg-gray-50">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Event Name</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Type</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Date</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Status</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Invitees</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Contacts</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Leads</th>
+        <section class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <h3 class="text-sm font-bold text-gray-800 mb-4">Events Tracking</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-100">
+              <thead>
+                <tr class="text-left">
+                  <th class="px-3 py-3 text-[10px] font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap">Event Name</th>
+                  <th class="px-3 py-3 text-[10px] font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap">Event Type</th>
+                  <th class="px-3 py-3 text-[10px] font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap">Date</th>
+                  <th class="px-3 py-3 text-[10px] font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap">Actual Status</th>
+                  <th class="px-3 py-3 text-[10px] font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap">Planned Invitees</th>
+                  <th class="px-3 py-3 text-[10px] font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap">Contacts</th>
+                  <th class="px-3 py-3 text-[10px] font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap">Leads</th>
+                  <th class="px-3 py-3 text-[10px] font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap">MQL</th>
+                  <th class="px-3 py-3 text-[10px] font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap">Oppty</th>
+                  <th class="px-3 py-3 text-[10px] font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap">Engage KOL</th>
                 </tr>
               </thead>
-              <tbody class="bg-white divide-y divide-gray-200">
-                <tr class="hover:bg-gray-50">
-                  <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">Sample Event 1</td>
-                  <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">Academic Forum</td>
-                  <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">2023-10-01</td>
-                  <td class="px-4 py-3 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Completed</span></td>
-                  <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">235</td>
-                  <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">80</td>
-                  <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">75</td>
+              <tbody class="divide-y divide-gray-100">
+                <tr class="hover:bg-gray-50 text-xs text-gray-700">
+                  <td class="px-3 py-3 font-medium">Sample Event 1</td>
+                  <td class="px-3 py-3 text-gray-500">Academic Forum</td>
+                  <td class="px-3 py-3 text-gray-500">2023-10-01</td>
+                  <td class="px-3 py-3"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-[10px] font-semibold">Completed</span></td>
+                  <td class="px-3 py-3 text-gray-500">235</td>
+                  <td class="px-3 py-3 text-gray-500">80</td>
+                  <td class="px-3 py-3 text-gray-500">75</td>
+                  <td class="px-3 py-3 text-gray-500">20</td>
+                  <td class="px-3 py-3 text-gray-500">5</td>
+                  <td class="px-3 py-3 text-gray-500">12</td>
                 </tr>
-                <tr class="hover:bg-gray-50">
-                  <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">Sample Event 2</td>
-                  <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">NPI launch</td>
-                  <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">2023-10-15</td>
-                  <td class="px-4 py-3 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Completed</span></td>
-                  <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">167</td>
-                  <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">60</td>
-                  <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">55</td>
+                <tr class="hover:bg-gray-50 text-xs text-gray-700">
+                  <td class="px-3 py-3 font-medium">Sample Event 2</td>
+                  <td class="px-3 py-3 text-gray-500">NPI launch</td>
+                  <td class="px-3 py-3 text-gray-500">2023-10-15</td>
+                  <td class="px-3 py-3"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-[10px] font-semibold">Completed</span></td>
+                  <td class="px-3 py-3 text-gray-500">167</td>
+                  <td class="px-3 py-3 text-gray-500">60</td>
+                  <td class="px-3 py-3 text-gray-500">55</td>
+                  <td class="px-3 py-3 text-gray-500">15</td>
+                  <td class="px-3 py-3 text-gray-500">3</td>
+                  <td class="px-3 py-3 text-gray-500">8</td>
+                </tr>
+                <tr class="hover:bg-gray-50 text-xs text-gray-700">
+                  <td class="px-3 py-3 font-medium">Sample Event 3</td>
+                  <td class="px-3 py-3 text-gray-500">National Exhibition</td>
+                  <td class="px-3 py-3 text-gray-500">2023-11-05</td>
+                  <td class="px-3 py-3"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-[10px] font-semibold">Completed</span></td>
+                  <td class="px-3 py-3 text-gray-500">386</td>
+                  <td class="px-3 py-3 text-gray-500">120</td>
+                  <td class="px-3 py-3 text-gray-500">110</td>
+                  <td class="px-3 py-3 text-gray-500">30</td>
+                  <td class="px-3 py-3 text-gray-500">7</td>
+                  <td class="px-3 py-3 text-gray-500">15</td>
+                </tr>
+                <tr class="hover:bg-gray-50 text-xs text-gray-700">
+                  <td class="px-3 py-3 font-medium">Sample Event 4</td>
+                  <td class="px-3 py-3 text-gray-500">Customer Event</td>
+                  <td class="px-3 py-3 text-gray-500">2023-11-20</td>
+                  <td class="px-3 py-3"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-[10px] font-semibold">Completed</span></td>
+                  <td class="px-3 py-3 text-gray-500">205</td>
+                  <td class="px-3 py-3 text-gray-500">75</td>
+                  <td class="px-3 py-3 text-gray-500">70</td>
+                  <td class="px-3 py-3 text-gray-500">22</td>
+                  <td class="px-3 py-3 text-gray-500">4</td>
+                  <td class="px-3 py-3 text-gray-500">10</td>
+                </tr>
+                <tr class="hover:bg-gray-50 text-xs text-gray-700">
+                  <td class="px-3 py-3 font-medium">Sample Event 5</td>
+                  <td class="px-3 py-3 text-gray-500">Academic Forum</td>
+                  <td class="px-3 py-3 text-gray-500">2023-12-08</td>
+                  <td class="px-3 py-3"><span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-[10px] font-semibold">Not Held</span></td>
+                  <td class="px-3 py-3 text-gray-500">175</td>
+                  <td class="px-3 py-3 text-gray-500">0</td>
+                  <td class="px-3 py-3 text-gray-500">0</td>
+                  <td class="px-3 py-3 text-gray-500">0</td>
+                  <td class="px-3 py-3 text-gray-500">0</td>
+                  <td class="px-3 py-3 text-gray-500">0</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div class="mt-4 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500 gap-2">
-            <div>Showing 1 to 2 of 12 entries</div>
+          <div class="mt-4 flex items-center justify-between text-xs text-gray-500">
+            <div>Showing 1 to 5 of 12 entries</div>
             <div class="flex space-x-1">
-              <button class="px-3 py-1 rounded border bg-blue-50 text-blue-600 font-medium">1</button>
-              <button class="px-3 py-1 rounded border bg-white text-gray-600 hover:bg-gray-50">2</button>
-              <button class="px-3 py-1 rounded border bg-white text-gray-600 hover:bg-gray-50">Next</button>
+              <button class="px-2 py-1 rounded border hover:bg-gray-50">Previous</button>
+              <button class="px-2 py-1 rounded border bg-blue-50 text-blue-600 border-blue-100">1</button>
+              <button class="px-2 py-1 rounded border hover:bg-gray-50">2</button>
+              <button class="px-2 py-1 rounded border hover:bg-gray-50">3</button>
+              <button class="px-2 py-1 rounded border hover:bg-gray-50">Next</button>
             </div>
           </div>
         </section>
-      </div>
 
-      <footer class="mt-12 mb-4 text-center text-gray-400 text-sm">
-        <p>© 2025 Event Marketing Dashboard. All rights reserved.</p>
-      </footer>
+        <footer class="text-center text-xs text-gray-400 py-6">
+          © 2025 Event Marketing Dashboard. All rights reserved.
+        </footer>
+      </div>
     </div>
 
     <script>
-      // 通用配置：确保图表适应容器大小，不撑破布局
+      Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
+      Chart.defaults.color = '#6b7280';
       Chart.defaults.maintainAspectRatio = false;
-      Chart.defaults.responsive = true;
 
       document.addEventListener('DOMContentLoaded', function() {
         
-        // 1. Monthly Conversion Trend
-        const ctxMonthly = document.getElementById('monthlyConversionChart');
-        if (ctxMonthly) {
-          new Chart(ctxMonthly, {
-            type: 'line',
-            data: {
-              labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-              datasets: [
-                { label: 'Contacts', data: [120, 150, 180, 220, 250, 280, 320, 350, 380, 420], borderColor: '#3b82f6', backgroundColor: '#3b82f6', tension: 0.3, pointRadius: 3 },
-                { label: 'MQL', data: [30, 35, 40, 45, 50, 55, 60, 65, 70, 75], borderColor: '#10b981', backgroundColor: '#10b981', tension: 0.3, pointRadius: 3 },
-                { label: 'Oppty', data: [5, 6, 8, 9, 10, 11, 12, 13, 14, 15], borderColor: '#f59e0b', backgroundColor: '#f59e0b', tension: 0.3, pointRadius: 3 }
-              ]
+        // 1. Monthly Conversion Trend (Line)
+        new Chart(document.getElementById('monthlyConversionChart'), {
+          type: 'line',
+          data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+            datasets: [
+              {
+                label: 'Contacts',
+                data: [120, 150, 180, 220, 250, 280, 320, 350, 380, 420],
+                borderColor: '#60a5fa', // Blue
+                backgroundColor: '#60a5fa',
+                tension: 0,
+                pointRadius: 3,
+                borderWidth: 1.5
+              },
+              {
+                label: 'MQL',
+                data: [30, 35, 40, 45, 50, 55, 60, 65, 70, 75],
+                borderColor: '#34d399', // Green/Teal
+                backgroundColor: '#34d399',
+                tension: 0,
+                pointRadius: 3,
+                borderWidth: 1.5
+              },
+              {
+                label: 'Oppty',
+                data: [5, 6, 8, 9, 10, 11, 12, 13, 14, 15],
+                borderColor: '#fbbf24', // Yellow/Orange
+                backgroundColor: '#fbbf24',
+                tension: 0,
+                pointRadius: 3,
+                borderWidth: 1.5
+              }
+            ]
+          },
+          options: {
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+              legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 6, padding: 20 } },
+              tooltip: {
+                backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                titleColor: '#1f2937',
+                bodyColor: '#1f2937',
+                borderColor: '#e5e7eb',
+                borderWidth: 1,
+                callbacks: {
+                  labelColor: function(context) {
+                    return { borderColor: context.dataset.borderColor, backgroundColor: context.dataset.backgroundColor };
+                  }
+                }
+              }
             },
-            options: {
-              interaction: { mode: 'index', intersect: false },
-              plugins: { legend: { position: 'top', align: 'end', labels: { boxWidth: 10, usePointStyle: true } } },
-              scales: { y: { beginAtZero: true, grid: { borderDash: [2, 4] } }, x: { grid: { display: false } } }
+            scales: {
+              y: { beginAtZero: true, grid: { borderDash: [4, 4] }, max: 600 },
+              x: { grid: { display: false } }
             }
-          });
-        }
+          }
+        });
 
-        // 2. Event Type Distribution
-        const ctxEventType = document.getElementById('eventTypeChart');
-        if (ctxEventType) {
-          new Chart(ctxEventType, {
-            type: 'doughnut',
-            data: {
-              labels: ['National Exhibition', 'NPI launch', 'Academic Forum', 'Customer Event'],
-              datasets: [{
-                data: [12, 18, 10, 8],
-                backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'],
-                borderWidth: 0
-              }]
+        // 2. Event Type Distribution (Pie Chart)
+        new Chart(document.getElementById('eventTypeChart'), {
+          type: 'pie', // Changed to Pie
+          data: {
+            labels: ['National Exhibition', 'NPI launch', 'Academic Forum', 'Customer Event'],
+            datasets: [{
+              data: [25, 38, 21, 17], // Updated data to match image
+              backgroundColor: [
+                '#3b82f6', // Nat Ex: Blue
+                '#10b981', // NPI: Green
+                '#f59e0b', // Forum: Orange
+                '#8b5cf6'  // Customer: Purple
+              ],
+              borderWidth: 1,
+              borderColor: '#fff'
+            }]
+          },
+          options: {
+            plugins: {
+              legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8, padding: 15, font: {size: 11} } }
             },
-            options: { plugins: { legend: { position: 'right' } }, cutout: '70%' }
-          });
-        }
+            layout: { padding: 0 }
+          }
+        });
 
-        // 3. TA Distribution
-        const ctxTA = document.getElementById('taDistributionChart');
-        if (ctxTA) {
-          new Chart(ctxTA, {
-            type: 'pie',
-            data: {
-              labels: ['Internal Med', 'Surgery', 'Pediatrics', 'OB/GYN', 'Others'],
-              datasets: [{
-                data: [35, 25, 15, 12, 13],
-                backgroundColor: ['#1e40af', '#3b82f6', '#60a5fa', '#93c5fd', '#bfdbfe'],
-                borderWidth: 1
-              }]
-            },
-            options: { plugins: { legend: { position: 'right' } } }
-          });
-        }
+        // 3. Personal Distribution (Pie Chart)
+        new Chart(document.getElementById('personalDistributionChart'), {
+          type: 'pie', // Changed to Pie
+          data: {
+            labels: ['Nurse', 'Technician', 'Other Staff', 'Management', 'Doctor'],
+            datasets: [{
+              data: [20, 15, 10, 10, 45],
+              backgroundColor: ['#93c5fd', '#bfdbfe', '#dbeafe', '#eff6ff', '#1e40af'], // Blue shades
+              borderWidth: 1,
+              borderColor: '#fff'
+            }]
+          },
+          options: {
+            plugins: { legend: { display: false } } // Hide legend to match clean look or position right if needed
+          }
+        });
 
-        // 4. Personal Role
-        const ctxPersonal = document.getElementById('personalDistributionChart');
-        if (ctxPersonal) {
-          new Chart(ctxPersonal, {
-            type: 'doughnut',
-            data: {
-              labels: ['Doctor', 'Nurse', 'Tech', 'Admin'],
-              datasets: [{ data: [45, 20, 15, 20], backgroundColor: ['#1e40af', '#3b82f6', '#93c5fd', '#bfdbfe'], borderWidth: 0 }]
-            },
-            options: { plugins: { legend: { display: false } }, cutout: '60%' }
-          });
-        }
+        // 4. City Level Distribution (Horizontal Bar - Blue)
+        new Chart(document.getElementById('cityLevelChart'), {
+          type: 'bar',
+          data: {
+            labels: ['Tier 1 City', 'Tier 2 City', 'Tier 3 City', 'Tier 4 & Below'],
+            datasets: [{
+              label: 'Percentage',
+              data: [40, 30, 20, 10],
+              backgroundColor: '#3b82f6',
+              barThickness: 20
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { display: true, grid: { display: false }, ticks: { callback: (v) => v + '%' } },
+              y: { grid: { display: false } }
+            }
+          }
+        });
 
-        // 5. City Level
-        const ctxCity = document.getElementById('cityLevelChart');
-        if (ctxCity) {
-          new Chart(ctxCity, {
-            type: 'bar',
-            data: {
-              labels: ['T1', 'T2', 'T3', 'T4+'],
-              datasets: [{ label: '%', data: [40, 30, 20, 10], backgroundColor: '#3b82f6', borderRadius: 4 }]
-            },
-            options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { grid: { display: false } } } }
-          });
-        }
+        // 5. Hospital Class Distribution (Vertical Bar - Red)
+        new Chart(document.getElementById('hospitalClassChart'), {
+          type: 'bar',
+          data: {
+            labels: ['Class I', 'Class II', 'Class III', 'Others'],
+            datasets: [{
+              data: [55, 30, 10, 5],
+              backgroundColor: '#ef4444', // Red
+              barThickness: 30
+            }]
+          },
+          options: {
+            plugins: { legend: { display: false } },
+            scales: {
+              y: { display: true, beginAtZero: true, grid: { borderDash: [2, 2] }, ticks: { callback: (v) => v + '%' } },
+              x: { grid: { display: false } }
+            }
+          }
+        });
 
-        // 6. Hospital Class
-        const ctxHospital = document.getElementById('hospitalClassChart');
-        if (ctxHospital) {
-          new Chart(ctxHospital, {
-            type: 'bar',
-            data: {
-              labels: ['Cls I', 'Cls II', 'Cls III'],
-              datasets: [{ label: '%', data: [55, 30, 15], backgroundColor: '#ef4444', borderRadius: 4 }]
-            },
-            options: { plugins: { legend: { display: false } }, scales: { y: { display: false, beginAtZero: true }, x: { grid: { display: false } } } }
-          });
-        }
+        // 6. TA Distribution (Pie Chart)
+        new Chart(document.getElementById('taDistributionChart'), {
+          type: 'pie', // Changed to Pie
+          data: {
+            labels: ['Internal Medicine', 'Surgery', 'Pediatrics', 'Obstetrics & Gynecology', 'Other Departments'],
+            datasets: [{
+              data: [35, 25, 15, 12.3, 12.7],
+              backgroundColor: ['#1e3a8a', '#2563eb', '#60a5fa', '#93c5fd', '#dbeafe'], // Blue gradient
+              borderWidth: 1,
+              borderColor: '#fff'
+            }]
+          },
+          options: {
+            plugins: { legend: { display: false } } // Simplified view
+          }
+        });
       });
     </script>
   </body>
